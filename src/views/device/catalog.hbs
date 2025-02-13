@@ -11,16 +11,7 @@
             <div class="product-grid">
                 {{#if devices}}
                 {{#each devices}}
-                <div class="product-item">
-                    <img
-                        src="{{imageUrl}}">
-                    <h3>{{brand}} {{model}}</h3>
-                    <h2>${{price}}</h2>
-                    <p>CPU: {{cpu}}</p>
-                    <p>GPU: {{gpu}}</p>
-                    <p>Screen: {{screenSize}}</p>
-                    <a href="/devices/{{_id}}/details" class="btn">View Details</a>
-                </div>
+                {{>device}}
                 {{/each}}
                 {{else}}
                     <p class="no-post">There haven't been any devices posted yet.</p>
