@@ -42,7 +42,7 @@ deviceController.get('/:deviceId/details', async (req,res) =>{
         if(!device){
             res.redirect('404');
         }else{
-            res.render('/details', {deviceData: device});
+            res.render('device/details', {deviceData: device});
         }
     }catch(err){
         const errorMsg = getErrorMessage(err);

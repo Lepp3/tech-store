@@ -9,20 +9,20 @@
         <div class="container">
             <div class="product-details">
                 <div class="product-image">
-                    <img src="https://s13emagst.akamaized.net/products/53590/53589192/images/res_790dbf4452932f219ec1268b12fc73a3.jpg?width=720&height=720&hash=933FA37D9229954034F5BBF01C2438FA" alt="Laptop">
+                    <img src="{{deviceData.imageUrl}}" alt="Laptop">
                 </div>
                 <div class="product-info">
-                    <h3>Brand: Acer</h3>
-                    <p><strong>Model:</strong> Nitro 5 AN515-58</p>
-                    <p><strong>Hard Disk:</strong> 512GB SSD</p>
-                    <p><strong>Screen Size:</strong> 15.6 inches</p>
-                    <p><strong>RAM:</strong> 16GB</p>
-                    <p><strong>Operating System:</strong> Windows 10</p>
-                    <p><strong>CPU:</strong> Intel Core™ i5-12450H</p>
-                    <p><strong>GPU:</strong> NVIDIA GeForce RTX™ 3050</p>
-                    <p><strong>Price:</strong> $1499</p>
-                    <p><strong>Color:</strong> Black</p>
-                    <p><strong>Weight:</strong> 2.5kg</p>
+                    <h3>Brand: {{deviceData.brand}}</h3>
+                    <p><strong>Model:</strong> {{deviceData.model}}</p>
+                    <p><strong>Hard Disk:</strong> {{deviceData.hardDisk}}</p>
+                    <p><strong>Screen Size:</strong> {{deviceData.screenSize}}</p>
+                    <p><strong>RAM:</strong> {{deviceData.ram}}</p>
+                    <p><strong>Operating System:</strong> {{deviceData.operationSys}}</p>
+                    <p><strong>CPU:</strong> {{deviceData.cpu}}</p>
+                    <p><strong>GPU:</strong> {{deviceData.gpu}}</p>
+                    <p><strong>Price:</strong> ${{deviceData.price}}</p>
+                    <p><strong>Color:</strong> {{deviceData.color}}</p>
+                    <p><strong>Weight:</strong> {{deviceData.weight}}</p>
                 </div>
             </div>
             <div class="product-actions">
