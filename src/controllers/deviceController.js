@@ -32,6 +32,23 @@ deviceController.post('/create', isAuth ,async (req,res)=>{
         res.render('/create', {error: error, deviceData});
     }
     
+});
+
+
+deviceController.get('/:deviceId/details', async (req,res) =>{
+    const deviceId = req.params.deviceId;
+    try{
+        const device = await deviceService.getOneDevice(deviceId);
+        if(!device){
+            res.redirect('404');
+        }else{
+            res.render('/details', {deviceData: device});
+        }
+    }catch(err){
+        const errorMsg = getErrorMessage(err);
+        res.render('/catalog', {error: errorMsg});
+    }
+    
 })
 
 
