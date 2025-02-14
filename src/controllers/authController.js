@@ -2,15 +2,16 @@ import { Router } from "express";
 import { authService } from "../services/authService.js";
 import { AUTH_COOKIE_NAME } from "../config.js";
 import { getErrorMessage } from "../utils/getErrorMessage.js";
+import { isGuest } from "../middlewares/authMiddleware.js";
 
 const authController = Router();
 
 
-authController.get('/register', (req,res)=>{
+authController.get('/register', isGuest, (req,res)=>{
     res.render('auth/register');
 });
 
-authController.post('/register', async (req,res)=>{
+authController.post('/register', isGuest ,async (req,res)=>{
    const userData = req.body;
 
     try{

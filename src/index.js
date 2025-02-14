@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 
 import routes from './routes.js';
-import { auth } from './middlewares/authMiddleware.js';
+import { auth, isAuth, isGuest } from './middlewares/authMiddleware.js';
 
 const app = express();
 
