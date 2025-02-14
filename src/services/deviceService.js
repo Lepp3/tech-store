@@ -9,6 +9,11 @@ const deviceService = {
         return query;
        
     },
+    async getLatestThree(){
+        let query = Device.find({}).sort({_id: 'desc'}).limit(3);
+
+        return query;
+    },
   async  getOneDevice(id){
         let query = Device.findById(id);
         return query;

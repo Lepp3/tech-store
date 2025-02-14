@@ -26,10 +26,10 @@ deviceController.post('/create', isAuth ,async (req,res)=>{
     const userId = req.user.id;
     try{
         await deviceService.createDevice(deviceData,userId);
-        res.redirect('/devices/catalog');
+        res.redirect('/device/catalog');
     }catch(err){
         const error = getErrorMessage(err);
-        res.render('/create', {error: error, deviceData});
+        res.render('device/create', {error: error, deviceData});
     }
     
 });
