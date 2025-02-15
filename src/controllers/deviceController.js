@@ -69,15 +69,34 @@ deviceController.get('/:deviceId/delete', isAuth ,async (req,res)=>{
    
 });
 
-deviceController.get('/:deviceId/edit', async(req,res)=>{
+deviceController.get('/:deviceId/edit', isAuth, async(req,res)=>{
     const deviceId = req.params.deviceId;
-    const userId = req.user?.id;
-    try{
-        
-    }catch(err){
-
+    const userId = req.user.id;
+    const device = await deviceService.getOneDevice(deviceId);
+    if(!device){
+        return res.redirect('/404');
+    };
+    if(!device.ownerId.equals(userId)) {
+        return res.redirect(`/device/${deviceId}/details`);
     }
+    res.render('device/edit', {deviceData:device})
 });
+
+deviceController.post('/:deviceId/edit',isAuth ,async (req,res)=>{
+    const deviceId = req.params.deviceId;
+    const newDeviceData = req.body;
+    const userId = req.user.id;
+    try{
+        await deviceService.updateDevice(deviceId,newDeviceData,userId);
+        return res.redirect(`/device/${deviceId}/details`);
+    }catch(err){
+        const errorMsg = getErrorMessage(err);
+        res.render('device/edit', {deviceData: newDeviceData, error:errorMsg})
+    }
+    
+    
+
+})
 
 
 deviceController.get('/:deviceId/prefer', isAuth, async(req,res)=>{

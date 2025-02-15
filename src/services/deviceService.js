@@ -48,6 +48,14 @@ const deviceService = {
         device.preferredList.push(userId);
 
         return device.save();
+    },
+    async updateDevice(deviceId,deviceData,userId){
+        const device = await this.getOneDevice(deviceId);
+        if(!device.ownerId.equals(userId)){
+            throw new Error('Only owner can edit this offer!');
+        }
+
+        return Device.findByIdAndUpdate(deviceId,deviceData);
     }
 }
 
