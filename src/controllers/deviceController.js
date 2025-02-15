@@ -40,7 +40,7 @@ deviceController.get('/:deviceId/details', async (req,res) =>{
     try{
         const device = await deviceService.getOneDevice(deviceId);
         if(!device){
-            res.redirect('404');
+            return res.redirect('404');
         }else{
             
             const isOwner = (device.ownerId).toString() === req.user?.id;
@@ -51,6 +51,50 @@ deviceController.get('/:deviceId/details', async (req,res) =>{
         res.render('device/catalog', {error: errorMsg});
     }
     
+});
+
+
+deviceController.get('/:deviceId/delete', async (req,res)=>{
+    const deviceId = req.params.deviceId;
+    const userId = req.user?.id;
+    try{
+        const device = await deviceService.getOneDevice(deviceId);
+        if(userId !== device.ownerId && !userId){
+            return res.redirect('/');
+        }else{
+
+        }
+    }catch(err){
+        const errorMsg = getErrorMessage(err);
+        res.render('device/catalog', {error: errorMsg});
+    }
+});
+
+deviceController.get('/:deviceId/edit', async(req,res)=>{
+    const deviceId = req.params.deviceId;
+    const userId = req.user?.id;
+    try{
+        
+    }catch(err){
+
+    }
+});
+
+
+deviceController.get('/:deviceId/prefer', isAuth, async(req,res)=>{
+    const deviceId = req.params.deviceId;
+    const userId = req.user.id;
+    
+    try{
+        await deviceService.preferDevice(deviceId,userId);
+        res.redirect(`/device/${deviceId}/details`);
+    }catch(err){
+        const errorMsg = getErrorMessage(err);
+        res.redirect('404', {error: errorMsg});
+        
+    }
+
+
 })
 
 

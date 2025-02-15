@@ -26,6 +26,24 @@ const deviceService = {
         
 
         return result;
+    },
+    async deleteDevice(id){
+        let query = Device.findByIdAndDelete(id);
+
+        return query
+    },
+    async preferDevice(deviceId,userId){
+        const device = await Device.findById(deviceId);
+        if(device.ownerId.equals(userId)){
+            throw new Error('Cannot prefer own offer!');
+        }
+        if(device.preferredList.includes(userId)){
+            throw new Error('You already preferred this offer!');
+        }
+
+        device.preferredList.push(userId);
+
+        return device.save();
     }
 }
 
