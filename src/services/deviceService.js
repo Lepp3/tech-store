@@ -10,7 +10,7 @@ const deviceService = {
         }
 
         if(filter.preferredBy){
-            query = query.in('preferredList', filter.preferredBy);
+            query = query.find({preferredList: filter.preferredBy});
         }
         
         return query;
