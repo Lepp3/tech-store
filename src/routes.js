@@ -13,7 +13,7 @@ routes.use('/device',deviceController);
 
 
 
-routes.get('*', (req,res)=>{
+routes.all('*', (req,res)=>{
     res.render('404');
 })
 
