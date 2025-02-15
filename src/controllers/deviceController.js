@@ -55,20 +55,18 @@ deviceController.get('/:deviceId/details', async (req,res) =>{
 });
 
 
-deviceController.get('/:deviceId/delete', async (req,res)=>{
+deviceController.get('/:deviceId/delete', isAuth ,async (req,res)=>{
     const deviceId = req.params.deviceId;
-    const userId = req.user?.id;
-    try{
-        const device = await deviceService.getOneDevice(deviceId);
-        if(userId !== device.ownerId && !userId){
-            return res.redirect('/');
-        }else{
+    const userId = req.user.id;
 
-        }
+    try{
+        await deviceService.deleteDevice(deviceId,userId);
+        res.redirect('/device/catalog');
     }catch(err){
-        const errorMsg = getErrorMessage(err);
-        res.render('device/catalog', {error: errorMsg});
+        
+        res.redirect('/404');
     }
+   
 });
 
 deviceController.get('/:deviceId/edit', async(req,res)=>{
@@ -89,14 +87,15 @@ deviceController.get('/:deviceId/prefer', isAuth, async(req,res)=>{
     
     try{
         await deviceService.preferDevice(deviceId,userId);
-        res.redirect(`/device/${deviceId}/details`);
+        
     }catch(err){
         const errorMsg = getErrorMessage(err);
-        res.redirect('/404');
+        console.log(errorMsg);
+        return res.redirect('/404');
         
     }
 
-
+    res.redirect(`/device/${deviceId}/details`);
 })
 
 
