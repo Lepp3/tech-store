@@ -6,7 +6,11 @@ const deviceService = {
    async getAllDevices(filter = {}){
         let query =  Device.find({});
         if(filter.ownerId){
-            query = query.find({ownerId: filter.owner})
+            query = query.find({ownerId: filter.ownerId})
+        }
+
+        if(filter.preferredBy){
+            query = query.in('preferredList', filter.preferredBy);
         }
         
         return query;
