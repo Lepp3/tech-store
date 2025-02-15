@@ -2,7 +2,7 @@ import { Router } from "express";
 import { authService } from "../services/authService.js";
 import { AUTH_COOKIE_NAME } from "../config.js";
 import { getErrorMessage } from "../utils/getErrorMessage.js";
-import { isGuest } from "../middlewares/authMiddleware.js";
+import { isGuest, isAuth } from "../middlewares/authMiddleware.js";
 
 const authController = Router();
 
@@ -30,12 +30,12 @@ authController.post('/register', isGuest ,async (req,res)=>{
 });
 
 
-authController.get('/login', (req,res)=>{
+authController.get('/login', isGuest ,(req,res)=>{
     res.render('auth/login');
 });
 
 
-authController.post('/login', async (req,res)=>{
+authController.post('/login', isGuest ,async (req,res)=>{
     const userData = req.body;
 
     try{
@@ -53,7 +53,7 @@ authController.post('/login', async (req,res)=>{
 });
 
 
-authController.get('/logout', (req,res)=>{
+authController.get('/logout',isAuth, (req,res)=>{
     res.clearCookie(AUTH_COOKIE_NAME);
     res.redirect('/');
 })

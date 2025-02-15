@@ -43,12 +43,12 @@ deviceController.get('/:deviceId/details', async (req,res) =>{
             res.redirect('404');
         }else{
             
-            const isOwner = (device.ownerId).toString() === req.user.id;
+            const isOwner = (device.ownerId).toString() === req.user?.id;
             res.render('device/details', {deviceData: device, isOwner});
         }
     }catch(err){
         const errorMsg = getErrorMessage(err);
-        res.render('/catalog', {error: errorMsg});
+        res.render('device/catalog', {error: errorMsg});
     }
     
 })
