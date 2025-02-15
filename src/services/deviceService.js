@@ -5,6 +5,9 @@ import Device from "../models/Device.js";
 const deviceService = {
    async getAllDevices(filter = {}){
         let query =  Device.find({});
+        if(filter.ownerId){
+            query = query.find({ownerId: filter.owner})
+        }
         
         return query;
        
@@ -55,7 +58,7 @@ const deviceService = {
             throw new Error('Only owner can edit this offer!');
         }
 
-        return Device.findByIdAndUpdate(deviceId,deviceData, {runValidators: true});
+        return Device.findByIdAndUpdate(deviceId,deviceData, {runValidators:true});
     }
 }
 

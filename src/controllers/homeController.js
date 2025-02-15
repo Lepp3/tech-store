@@ -23,9 +23,9 @@ homeController.get('/about', (req,res)=>{
 
 
 homeController.get('/profile', isAuth ,async (req,res)=>{
+    const ownDevices = await deviceService.getAllDevices({owner: req.user.id});
 
-
-    res.render('profile');
+    res.render('profile', {ownDevices, preferredLaptops: []});
 })
 
 
